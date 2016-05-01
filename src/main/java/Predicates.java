@@ -6,16 +6,12 @@ import java.util.function.Predicate;
  * Created by fcalderon on 4/16/16.
  */
 public class Predicates {
+    static List<Employee> employees = new ArrayList<>();
     public static void main(String args[]) {
         Predicate<Employee> isRich = e -> e.getSalary() > 20000;
         Predicate<Employee> isEarly = e -> e.getId() <= 10;
 
-        List<Employee> employees = new ArrayList<>();
-        employees.add(new Employee("Fer", 3, 30000));
-        employees.add(new Employee("Leo", 400, 30000));
-        employees.add(new Employee("Gera", 2000, 30));
-        employees.add(new Employee("Jorge", 3, 9));
-        employees.add(new Employee("Erick", 355, 45));
+        setEmployees();
 
         System.out.printf("Rich employees: %s.%n", allMatches(employees, isRich));
         System.out.printf("Employees hired early: %s.%n", allMatches(employees, isEarly));
@@ -30,6 +26,14 @@ public class Predicates {
         System.out.printf("Employees in list that are equals to Polly Programmer: %s.%n",
                 allMatches(employees, isPolly));
 
+    }
+
+    public static void setEmployees(){
+        employees.add(new Employee("Fer", 3, 30000));
+        employees.add(new Employee("Leo", 400, 30000));
+        employees.add(new Employee("Gera", 2000, 30));
+        employees.add(new Employee("Jorge", 3, 9));
+        employees.add(new Employee("Erick", 355, 45));
     }
 
     public static <T extends Employee> List<String> allMatches(List<T> candidates, Predicate<T> matchFunction) {
@@ -63,4 +67,10 @@ class Employee {
     public long getSalary() {
         return _salary;
     }
+
+    public void setSalary(long salary) {
+        _salary = salary;
+    }
 }
+
+
